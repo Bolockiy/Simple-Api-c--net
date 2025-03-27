@@ -12,8 +12,8 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace toDoList.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20250324113908_ToDo_v2")]
-    partial class ToDo_v2
+    [Migration("20250327142855_UserSeeding")]
+    partial class UserSeeding
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -54,6 +54,35 @@ namespace toDoList.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("tasks", (string)null);
+                });
+
+            modelBuilder.Entity("toDoList.Entities.UserAccount.UserAccount", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("FullName")
+                        .HasMaxLength(255)
+                        .HasColumnType("character varying(255)");
+
+                    b.Property<string>("Password")
+                        .HasMaxLength(500)
+                        .HasColumnType("character varying(500)");
+
+                    b.Property<int?>("Role")
+                        .HasColumnType("integer");
+
+                    b.Property<string>("UserName")
+                        .IsRequired()
+                        .HasMaxLength(255)
+                        .HasColumnType("character varying(255)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("UserAccount", (string)null);
                 });
 #pragma warning restore 612, 618
         }
