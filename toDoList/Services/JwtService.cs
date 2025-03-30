@@ -37,7 +37,8 @@ namespace toDoList.Services
             {
                 Subject = new ClaimsIdentity(new[]
                 {
-                    new Claim(JwtRegisteredClaimNames.Name,request.UserName)
+                    new Claim(JwtRegisteredClaimNames.Name, request.UserName),
+                    new Claim(ClaimTypes.Role, userAcc.Role.ToString())
                 }),
                 Issuer = issuer,
                 Expires = tokenExpiryTimeStamp,

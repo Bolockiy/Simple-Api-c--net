@@ -17,9 +17,8 @@ namespace ApiToDo.Infrastructure.Data
         {
             base.OnModelCreating(modelBuilder);
             modelBuilder.Entity<ToDoTask>().ToTable("tasks");
-
             modelBuilder.Entity<UserAccount>().ToTable("UserAccount");
         }
-        
+
     }
 }

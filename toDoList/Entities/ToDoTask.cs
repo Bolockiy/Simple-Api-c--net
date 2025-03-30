@@ -20,6 +20,26 @@ namespace ApiToDo.Domain.Entities
         public bool IsCompleted { get; set; } = false;
 
         public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
-        public DateTime? CompletedAt { get; set; }
+
+        public DateTime? CompletedAt { get; private set; } = null;
+
+        public DateTime? UpdatedAt { get; private set; } = null;
+
+        public void Update(string? title, string? description, bool? isCompleted)
+        {
+            if (!string.IsNullOrWhiteSpace(title))
+                Title = title;
+
+            if (!string.IsNullOrWhiteSpace(description))
+                Description = description;
+
+            if (isCompleted.HasValue)
+            {
+                IsCompleted = isCompleted.Value;
+                CompletedAt = IsCompleted ? DateTime.UtcNow : null;
+            }
+
+            UpdatedAt = DateTime.UtcNow;
+        }
     }
 }

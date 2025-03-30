@@ -1,9 +1,11 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using toDoList.Security;
 
 namespace toDoList.Entities.UserAccount
 {
-    [Table("UserAccount")]
+    [Table("useraccount")]
     public class UserAccount
     {
         [Key]
@@ -22,5 +24,11 @@ namespace toDoList.Entities.UserAccount
 
         public int? Role { get; set; } = 0;
 
+        public DateTime UpdatedAt { get; private set; } = DateTime.UtcNow;
+
+        public void UpdateDate()
+        {
+            UpdatedAt = DateTime.UtcNow;
+        }
     }
 }
