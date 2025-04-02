@@ -8,7 +8,7 @@ namespace ApiToDo.Domain.Entities
     {
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public int Id { get; set; }
+        public int Id { get; private set; }
 
         [Required]
         [MaxLength(255)]
