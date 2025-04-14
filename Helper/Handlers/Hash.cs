@@ -2,13 +2,13 @@
 using System.Security.Cryptography;
 using System.Text;
 
-namespace toDoList.Security
+namespace Helper.Security
 {
     public class PasswordHasher
     {
-        private const int SaltSize = 16; // Размер соли (в байтах)
-        private const int KeySize = 32;  // Размер ключа (в байтах)
-        private const int Iterations = 100_000; // Количество итераций (чем больше, тем безопаснее, но медленнее)
+        private const int SaltSize = 16;
+        private const int KeySize = 32;
+        private const int Iterations = 100_000;
         private static readonly HashAlgorithmName HashAlgorithm = HashAlgorithmName.SHA256;
 
         public static string HashPassword(string password)

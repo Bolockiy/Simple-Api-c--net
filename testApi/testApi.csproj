@@ -13,4 +13,8 @@
     <PackageReference Include="NLog.Web.AspNetCore" Version="5.4.0" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\toDoList\ApiLayer.csproj" />
+  </ItemGroup>
+
 </Project>

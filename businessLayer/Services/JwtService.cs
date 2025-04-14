@@ -6,8 +6,9 @@ using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Security.Cryptography.X509Certificates;
 using System.Text;
-using toDoList.Security;
+using Helper.Security;
 using toDoList.User;
+using Microsoft.Extensions.Configuration;
 
 namespace toDoList.Services
 {
@@ -20,7 +21,6 @@ namespace toDoList.Services
         {
             m_dbContext = _dbContext;
             m_configuration = _configuration;
-
         }
         public async Task<LoginResponse?> Authenticate(LoginRequest request)
         {
@@ -36,16 +36,18 @@ namespace toDoList.Services
             var tokenDescriptor = new SecurityTokenDescriptor
             {
                 Subject = new ClaimsIdentity(new[]
-                {
-                    new Claim(JwtRegisteredClaimNames.Name, request.UserName),
-                    new Claim(ClaimTypes.Role, userAcc.Role.ToString())
+        {
+            new Claim(JwtRegisteredClaimNames.Name, request.UserName),
+            new Claim(ClaimTypes.Role, userAcc.Role.ToString())
                 }),
                 Issuer = issuer,
-                Expires = tokenExpiryTimeStamp,
                 Audience = audience,
-                SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(Encoding.ASCII.GetBytes(Key)),
-                SecurityAlgorithms.HmacSha512Signature),
+                Expires = tokenExpiryTimeStamp,
+                SigningCredentials = new SigningCredentials(
+        new SymmetricSecurityKey(Encoding.UTF8.GetBytes(Key)),
+        SecurityAlgorithms.HmacSha512Signature)
             };
+
             var TokenHandler = new JwtSecurityTokenHandler();
             var securityToken = TokenHandler.CreateToken(tokenDescriptor);
             var accessToken = TokenHandler.WriteToken(securityToken);

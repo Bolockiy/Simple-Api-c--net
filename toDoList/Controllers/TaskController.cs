@@ -1,5 +1,5 @@
-﻿using ApiToDo.Application.Repositories;
-using ApiToDo.Domain.Entities;
+﻿using ApiToDo.Domain.Entities;
+using BusinessLayer.Services;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using NLog;
@@ -13,9 +13,9 @@ namespace ApiToDo.Api.Controllers
     public class TaskController : ControllerBase
     {
         private static readonly Logger logger = LogManager.GetCurrentClassLogger();
-        private readonly ITaskRepository _taskRepository;
+        private readonly ICrudService<ToDoTask> _taskRepository;
 
-        public TaskController(ITaskRepository taskRepository)
+        public TaskController(ICrudService<ToDoTask> taskRepository)
         {
             _taskRepository = taskRepository;
             logger.Info("TaskController инициализирован.");
@@ -24,18 +24,16 @@ namespace ApiToDo.Api.Controllers
         [HttpGet]
         public async Task<ActionResult<List<ToDoTask>>> Get()
         {
-            logger.Info("Запрос на получение всех задач.");
-            return Ok(await _taskRepository.GetAllAsync());
+            var resp = await _taskRepository.GetAllAsync();
+            return Ok(resp);
         }
 
         [HttpGet("{id}")]
         public async Task<ActionResult<ToDoTask>> GetById(int id)
         {
-            logger.Info($"Запрос на получение задачи с ID: {id}");
             var task = await _taskRepository.GetByIdAsync(id);
             if (task == null)
             {
-                logger.Warn($"Задача с ID {id} не найдена.");
                 return NotFound();
             }
             return Ok(task);
@@ -45,15 +43,9 @@ namespace ApiToDo.Api.Controllers
         [HttpPost]
         public async Task<ActionResult> Create([FromBody] ToDoTask task)
         {
-            task = new ToDoTask
-            {
-                Title = task.Title,
-                Description = task.Description,
-                CreatedAt = DateTime.UtcNow
-            };
-
-            await _taskRepository.AddAsync(task);
-            return CreatedAtAction(nameof(GetById), new { id = task.Id }, task);
+            if (!await _taskRepository.CreateAsync(task))
+                return BadRequest("Невозможно создать задачу, возможно отсутсвует поле Название");
+           return CreatedAtAction(nameof(GetById), new { id = task.Id }, task);
         }
 
 
@@ -61,35 +53,16 @@ namespace ApiToDo.Api.Controllers
         [HttpPut("{id}")]
         public async Task<IActionResult> Update(int id, [FromBody] ToDoTask updatedTask)
         {
-            if (id != updatedTask.Id)
-            {
-                logger.Warn($"Несоответствие ID задачи: ID в маршруте {id} не совпадает с ID задачи {updatedTask.Id}.");
-                return BadRequest("ID задачи в маршруте не совпадает с ID в теле запроса.");
-            }
-
-            var existingTask = await _taskRepository.GetByIdAsync(id);
-            if (existingTask == null)
-            {
-                logger.Warn($"Попытка обновления несуществующей задачи с ID: {id}");
-                return NotFound($"Задача с ID {id} не найдена.");
-            }
-
-            existingTask.Update(updatedTask.Title, updatedTask.Description, updatedTask.IsCompleted);
-
-            logger.Info($"Обновление задачи с ID: {id}");
-            await _taskRepository.UpdateAsync(existingTask);
-
-            logger.Info($"Задача с ID {id} успешно обновлена.");
-            return Ok(existingTask);
+            if (!await _taskRepository.UpdateAsync(id, updatedTask))
+                return BadRequest("Не получилось обновить запись");
+            return Ok();
         }
 
         [Authorize(Roles = "1")]
         [HttpDelete("{id}")]
         public async Task<IActionResult> Delete(int id)
-        {
-            logger.Info($"Удаление задачи с ID: {id}");
+        {   
             await _taskRepository.DeleteAsync(id);
-            logger.Info($"Задача с ID {id} успешно удалена.");
             return NoContent();
         }
     }
