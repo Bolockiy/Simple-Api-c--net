@@ -13,6 +13,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Helper", "Helper\Helper.csp
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BusinessLayer", "businessLayer\BusinessLayer.csproj", "{A78F8378-377D-4654-BB08-A6854013DACB}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ClientWPF", "ClientWPF\ClientWPF.csproj", "{0139F019-E7D0-42EA-B1FA-4A3AA52A15BC}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -39,6 +41,10 @@ Global
 		{A78F8378-377D-4654-BB08-A6854013DACB}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A78F8378-377D-4654-BB08-A6854013DACB}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A78F8378-377D-4654-BB08-A6854013DACB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0139F019-E7D0-42EA-B1FA-4A3AA52A15BC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0139F019-E7D0-42EA-B1FA-4A3AA52A15BC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0139F019-E7D0-42EA-B1FA-4A3AA52A15BC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0139F019-E7D0-42EA-B1FA-4A3AA52A15BC}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
