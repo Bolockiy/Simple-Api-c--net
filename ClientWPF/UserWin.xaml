@@ -8,10 +8,15 @@
         Title="UserWin" Height="450" Width="800">
     <Grid>
         <TextBlock Text="User Window" FontSize="24" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,20,0,0"/>
-        <TextBox Name="UserNameTextBox" Width="200" Height="30" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,-60,0,0"/>
-        <TextBox Name="FullNameTextBox" Width="200" Height="30" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,107,0,0" />
-        <Button Content="Зарегистрировать пользователя" Width="200" Height="40" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,174,0,0" Click="RegisterButton_Click"/>
-        <Button Content="Удалить пользователя" Width="200" Height="40" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,224,0,0" Click="DeleteUserButton_Click"/>
-        <Button Content="Получить пользователя по имени" Width="200" Height="40" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,274,0,0" Click="GetUserByNameButton_Click"/>
+
+        <Label Content="Введите имя пользователя:" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,-110,0,0"/>
+        <TextBox Name="UserNameTextBox" Width="200" Height="30" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,180,0,0"/>
+
+        <Label Content="Введите полное имя:" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,70,0,0"/>
+        <TextBox Name="FullNameTextBox" Width="200" Height="30" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,100,0,0" />
+
+        <Button Content="Зарегистрировать пользователя" Width="200" Height="40" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,229,0,0" Click="RegisterButton_Click"/>
+        <Button Content="Удалить пользователя" Width="200" Height="40" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,294,0,0" Click="DeleteUserButton_Click"/>
+        <Button Content="Получить пользователя по имени" Width="200" Height="40" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,359,0,0" Click="GetUserByNameButton_Click"/>
     </Grid>
 </Window>

@@ -21,6 +21,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\businessLayer\BusinessLayer.csproj" />
+    <ProjectReference Include="..\Helper\Helper.csproj" />
     <ProjectReference Include="..\toDoList\ApiLayer.csproj" />
   </ItemGroup>
 

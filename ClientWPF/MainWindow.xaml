@@ -7,10 +7,14 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="250" Width="165">
     <Grid Background="#FFA6B251">
-        <Button x:Name="BTN_1" Content="Регистрация" HorizontalAlignment="Left" Margin="25,134,0,0" VerticalAlignment="Top" Width="97" Click="BTN_1_Click"/>
-        <Label Content="Авторизация" HorizontalAlignment="Left" Margin="25,24,0,0" VerticalAlignment="Top" Width="95" Background="{x:Null}"/>
-        <TextBox x:Name="PlaceholderText" Text="Введите логин" HorizontalAlignment="Left" Margin="25,64,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="95" TextChanged="PlaceholderText_TextChanged"/>
-        <TextBox  x:Name="PlaceholderText_1" Text="Введите пароль" HorizontalAlignment="Left" Margin="25,99,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="95"/>
-    </Grid>
+        <Label Content="Регистрация" HorizontalAlignment="Left" Margin="25,10,0,0" VerticalAlignment="Top" Width="95"/>
 
+        <Label Content="Логин:" HorizontalAlignment="Left" Margin="25,40,0,0" VerticalAlignment="Top" Width="95"/>
+        <TextBox x:Name="PlaceholderText" HorizontalAlignment="Left" Margin="25,60,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="95"/>
+
+        <Label Content="Пароль:" HorizontalAlignment="Left" Margin="25,90,0,0" VerticalAlignment="Top" Width="95"/>
+        <TextBox x:Name="PlaceholderText_1" HorizontalAlignment="Left" Margin="25,110,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="95"/>
+
+        <Button x:Name="BTN_1" Content="Регистрация" HorizontalAlignment="Left" Margin="25,160,0,0" VerticalAlignment="Top" Width="97" Click="BTN_1_Click"/>
+    </Grid>
 </Window>

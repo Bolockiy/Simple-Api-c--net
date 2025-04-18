@@ -1,4 +1,5 @@
 ﻿using BusinessLayer.Services;
+using Helper.Security;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using System;
@@ -43,10 +44,16 @@ namespace ClientWPF
 
         private async void BTN_1_Click(object sender, RoutedEventArgs e)
         {
-            var inBd = await _UserService.GetByUserNameAsync(PlaceholderText.Text);
+            var inBd = await _UserService.GetByUserNameAsync(LoginTextBox.Text);
             if (inBd == null)
             {
                 MessageBox.Show("Не нашлось пользователя с таким именем");
+                return;
+            }
+
+            if (!PasswordHasher.VerifyPassword(PasswordTextBox.Text, inBd.Password))
+            {
+                MessageBox.Show("Неверный пароль");
                 return;
             }
             if (inBd.Role == 1)
@@ -57,8 +64,8 @@ namespace ClientWPF
             }
             else
             {
-                UserWin userWin = new UserWin();
-                userWin.Show();
+                TaskWin taskWin = new TaskWin();
+                taskWin.Show();
                 this.Close();
             }
         }

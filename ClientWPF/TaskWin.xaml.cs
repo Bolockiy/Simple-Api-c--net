@@ -141,5 +141,9 @@ namespace ClientWPF
             }
         }
 
+        private void RefreshTasksButton_Click(object sender, RoutedEventArgs e)
+        {
+            AddTasksAsync();
+        }
     }
 }

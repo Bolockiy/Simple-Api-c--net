@@ -7,8 +7,8 @@
         mc:Ignorable="d"
         Title="ChoiseWin" Height="200" Width="300">
     <Grid>
-        <Button x:Name="Auth" Content="Авторизация" HorizontalAlignment="Left" Margin="35,0,0,0" VerticalAlignment="Center" Height="28" Width="80" Click="Button_Click"/>
-        <Button x:Name="Reg" Content="Регистрация" HorizontalAlignment="Left" Margin="175,78,0,0" VerticalAlignment="Top" Height="26" Width="80" Click="Button_Click_1"/>
+        <Button x:Name="Auth" Content="Авторизация" HorizontalAlignment="Left" VerticalAlignment="Center" Height="28" Width="80" Click="Button_Click" Margin="95,0,0,0"/>
+        <Button x:Name="Reg" Content="Регистрация" HorizontalAlignment="Left" Margin="95,129,0,0" VerticalAlignment="Top" Height="26" Width="80" Click="Button_Click_1"/>
 
     </Grid>
 </Window>
