@@ -177,5 +177,32 @@ namespace BusinessLayer.Services
                 return false;
             }
         }
+
+        public async Task<UserAccount?> GetByUserNameAsync(string userName)
+        {
+            if (string.IsNullOrWhiteSpace(userName))
+            {
+                logger.Warn("Передано пустое имя пользователя.");
+                return null;
+            }
+
+            try
+            {
+                var user = await dbContext.UserAccounts.FirstOrDefaultAsync(x => x.UserName == userName);
+
+                if (user == null)
+                {
+                    logger.Warn($"Пользователь с именем {userName} не найден.");
+                    return null;
+                }
+
+                return user;
+            }
+            catch (Exception ex)
+            {
+                logger.Error(ex, $"Ошибка при получении пользователя по имени: {userName}");
+                return null;
+            }
+        }
     }
 }

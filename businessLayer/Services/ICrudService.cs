@@ -14,5 +14,6 @@ namespace BusinessLayer.Services
         Task<bool> CreateAsync(T obj);
         Task<bool> UpdateAsync(int id, T obj);
         Task<bool> DeleteAsync(int id);
+        Task<T?> GetByUserNameAsync(string text);
     }
 }

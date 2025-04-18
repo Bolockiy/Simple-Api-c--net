@@ -54,10 +54,16 @@ namespace ClientWPF
 
         }
 
-        private void BTN_1_Click(object sender, RoutedEventArgs e)
+        private async void BTN_1_Click(object sender, RoutedEventArgs e)
         {
             try
             {
+              var inBd = await _UserService.GetByUserNameAsync(PlaceholderText.Text);
+                if (inBd!=null)
+                {
+                    MessageBox.Show("Такой пользовтаель уже существует в системе");
+                    return;
+                }
                 UserAccount account = new UserAccount()
                 {
                     UserName = PlaceholderText.Text,
@@ -65,11 +71,15 @@ namespace ClientWPF
                     Password = PlaceholderText_1.Text,
                     Role = 0
                 };
-                _UserService.CreateAsync(account);
+               await _UserService.CreateAsync(account);
+               MessageBox.Show("Вы успешно зарегестрировались");
+               ChoiseWin choiseWin = new ChoiseWin();
+               choiseWin.Show();
+               this.Close();
             }
             catch (Exception ex) 
             {
-                MessageBox.Show("Что-то пошло не так");
+                MessageBox.Show($"Что-то пошло не так {ex.Data.ToString()}" );
             }
        }
     }

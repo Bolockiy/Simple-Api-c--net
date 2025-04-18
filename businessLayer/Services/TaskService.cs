@@ -139,5 +139,10 @@ namespace BusinessLayer.Services
                 return false;
             }
         }
+
+        public async Task<ToDoTask?> GetByUserNameAsync(string text)
+        {
+            return null;
+        }
     }
 }
