@@ -56,7 +56,8 @@ namespace toDoList.Services
             {
                 AccessToken = accessToken,
                 UserName = request.UserName,
-                ExpiresIn = (int)tokenExpiryTimeStamp.Subtract(DateTime.UtcNow).TotalSeconds
+                ExpiresIn = (int)tokenExpiryTimeStamp.Subtract(DateTime.UtcNow).TotalSeconds,
+                isAdmin = (userAcc.Role == 1) ? true : false
             };
         }
 
