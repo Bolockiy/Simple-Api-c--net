@@ -25,18 +25,7 @@ namespace ClientWPF
         public TaskWin()
         {
             InitializeComponent();
-
-            var config = new ConfigurationBuilder()
-                .SetBasePath(Directory.GetCurrentDirectory())
-                .AddJsonFile("appsettings.json", optional: false)
-                .Build();
-
-            var services = new ServiceCollection();
-            services.AddAppServices(config);
-            services.AddBusinessLayer();
-
-            var provider = services.BuildServiceProvider();
-            _taskService = provider.GetRequiredService<ICrudService<ToDoTask>>();
+            _taskService = App.ServiceProvider.GetRequiredService<ICrudService<ToDoTask>>();
             AddTasksAsync();
         }
 

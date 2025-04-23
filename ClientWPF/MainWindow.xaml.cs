@@ -30,21 +30,10 @@ namespace ClientWPF
     public partial class MainWindow : Window
     {
         private readonly ICrudService<UserAccount> _UserService;
-        private readonly ServiceProvider _serviceProvider;
 
         public MainWindow()
         {
-            InitializeComponent();
-            var configuration = new ConfigurationBuilder()
-                      .SetBasePath(Directory.GetCurrentDirectory())
-                      .AddJsonFile("appsettings.json", optional: false)
-                      .Build();
-            
-            var services = new ServiceCollection();
-            services.AddAppServices(configuration);
-            services.AddBusinessLayer();
-            _serviceProvider = services.BuildServiceProvider();
-            _UserService = _serviceProvider.GetRequiredService<ICrudService<UserAccount>>();
+            _UserService = App.ServiceProvider.GetRequiredService<ICrudService<UserAccount>>();
         }
 
         private void TextBox_TextChanged(object sender, TextChangedEventArgs e)

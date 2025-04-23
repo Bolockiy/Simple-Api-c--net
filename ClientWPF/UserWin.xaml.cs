@@ -11,20 +11,10 @@ namespace ClientWPF
     public partial class UserWin : Window
     {
         private readonly ICrudService<UserAccount> _userService;
-        private readonly ServiceProvider _serviceProvider;
         public UserWin()
         {
             InitializeComponent();
-            var configuration = new ConfigurationBuilder()
-                      .SetBasePath(Directory.GetCurrentDirectory())
-                      .AddJsonFile("appsettings.json", optional: false)
-                      .Build();
-
-            var services = new ServiceCollection();
-            services.AddAppServices(configuration);
-            services.AddBusinessLayer();
-            _serviceProvider = services.BuildServiceProvider();
-            _userService = _serviceProvider.GetRequiredService<ICrudService<UserAccount>>();
+            _userService = App.ServiceProvider.GetRequiredService<ICrudService<UserAccount>>();
         }
 
         private void RegisterButton_Click(object sender, RoutedEventArgs e)
