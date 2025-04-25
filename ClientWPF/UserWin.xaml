@@ -10,7 +10,7 @@
         <TextBlock Text="User Window" FontSize="24" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,20,0,0"/>
 
         <Label Content="Введите имя пользователя:" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,-110,0,0"/>
-        <TextBox Name="UserNameTextBox" Width="200" Height="30" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,180,0,0"/>
+        <TextBox Name="UserNameTextBox" Width="200" Height="30" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,180,0,0" TextChanged="UserNameTextBox_TextChanged"/>
 
         <Label Content="Введите полное имя:" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,70,0,0"/>
         <TextBox Name="FullNameTextBox" Width="200" Height="30" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,100,0,0" />

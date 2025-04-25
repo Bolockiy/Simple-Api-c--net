@@ -34,10 +34,18 @@ namespace toDoList.Controllers
             return Ok(resp);
         }
 
-        [HttpGet("{id}")]
+        [HttpGet("id/{id}")]
         public async Task<ActionResult<UserAccount?>> GetById(int id)
         {
             var user = await _UserService.GetByIdAsync(id);
+            if (user == null) return BadRequest("Пользователь не найден");
+            return user;
+        }
+
+        [HttpGet("name/{name}")]
+        public async Task<ActionResult<UserAccount?>> GetByName(string name)
+        {
+            var user = await _UserService.GetByUserNameAsync(name);
             if (user == null) return BadRequest("Пользователь не найден");
             return user;
         }

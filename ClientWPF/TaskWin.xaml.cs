@@ -1,4 +1,5 @@
-﻿using ApiToDo.Domain.Entities;
+﻿using ApiLayer.Extensions;
+using ApiToDo.Domain.Entities;
 using BusinessLayer.Services;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -21,19 +22,23 @@ namespace ClientWPF
     public partial class TaskWin : Window
     {
         private readonly ICrudService<ToDoTask> _taskService;
+        private readonly string Token;
 
-        public TaskWin()
+        public TaskWin(string token)
         {
             InitializeComponent();
             _taskService = App.ServiceProvider.GetRequiredService<ICrudService<ToDoTask>>();
+            Token = token;
             AddTasksAsync();
+           
         }
 
         public async void AddTasksAsync()
         {
-            var tasks = await _taskService.GetAllAsync();
+            var tasks = await Connect.GetTasksAsync(Token);
             TasksDataGrid.ItemsSource = tasks;
         }
+
         private async void AddButton_Click(object sender, RoutedEventArgs e)
         {
             try
@@ -45,10 +50,11 @@ namespace ClientWPF
                     IsCompleted = IsCompletedCheckBox.IsChecked == true
                 };
 
-                var result = await _taskService.CreateAsync(newTask);
+                var result = await Connect.CreateTaskAsync(newTask, Token);
                 if (result)
                 {
                     MessageBox.Show("Задача успешно добавлена");
+                    AddTasksAsync();
                 }
                 else
                 {
@@ -65,14 +71,21 @@ namespace ClientWPF
         {
             try
             {
-                var idStr = TaskIdTextBox.Text;
-                if (int.TryParse(idStr, out int taskId))
+                if (int.TryParse(TaskIdTextBox.Text, out int taskId))
                 {
-                    var task = await _taskService.GetByIdAsync(taskId);
+                    var task = await Connect.GetTaskByIdAsync(taskId, Token);
                     if (task != null)
                     {
-                        await _taskService.DeleteAsync(taskId);
-                        MessageBox.Show("Задача успешно удалена");
+                        var result = await Connect.DeleteTaskAsync(taskId, Token);
+                        if (result)
+                        {
+                            MessageBox.Show("Задача успешно удалена");
+                            AddTasksAsync();
+                        }
+                        else
+                        {
+                            MessageBox.Show("Не удалось удалить задачу");
+                        }
                     }
                     else
                     {
@@ -81,7 +94,7 @@ namespace ClientWPF
                 }
                 else
                 {
-                    MessageBox.Show("Пожалуйста, введите корректный ID задачи для удаления");
+                    MessageBox.Show("Пожалуйста, введите корректный ID задачи");
                 }
             }
             catch (Exception ex)
@@ -94,20 +107,20 @@ namespace ClientWPF
         {
             try
             {
-                var idStr = TaskIdTextBox.Text;
-                if (int.TryParse(idStr, out int taskId))
+                if (int.TryParse(TaskIdTextBox.Text, out int taskId))
                 {
-                    var task = await _taskService.GetByIdAsync(taskId);
+                    var task = await Connect.GetTaskByIdAsync(taskId, Token);
                     if (task != null)
                     {
                         task.Title = TitleTextBox.Text;
                         task.Description = DescriptionTextBox.Text;
                         task.IsCompleted = IsCompletedCheckBox.IsChecked == true;
 
-                        var result = await _taskService.UpdateAsync(taskId, task);
+                        var result = await Connect.UpdateTaskAsync(taskId, task, Token);
                         if (result)
                         {
                             MessageBox.Show("Задача успешно обновлена");
+                            AddTasksAsync();
                         }
                         else
                         {
@@ -121,7 +134,7 @@ namespace ClientWPF
                 }
                 else
                 {
-                    MessageBox.Show("Пожалуйста, введите корректный ID задачи для обновления");
+                    MessageBox.Show("Введите корректный ID задачи");
                 }
             }
             catch (Exception ex)
@@ -129,7 +142,6 @@ namespace ClientWPF
                 MessageBox.Show($"Ошибка: {ex.Message}");
             }
         }
-
         private void RefreshTasksButton_Click(object sender, RoutedEventArgs e)
         {
             AddTasksAsync();

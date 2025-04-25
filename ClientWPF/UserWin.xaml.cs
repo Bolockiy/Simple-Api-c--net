@@ -1,20 +1,18 @@
-﻿using BusinessLayer.Services;
-using Microsoft.Extensions.Configuration;
+﻿using ApiLayer.Extensions;
+using ApiToDo.Domain.Entities;
 using Microsoft.Extensions.DependencyInjection;
 using System;
-using System.IO;
 using System.Windows;
-using toDoList.Entities.UserAccount;
 
 namespace ClientWPF
 {
     public partial class UserWin : Window
     {
-        private readonly ICrudService<UserAccount> _userService;
-        public UserWin()
+        private string Token;
+        public UserWin(string token)
         {
+            Token = token;
             InitializeComponent();
-            _userService = App.ServiceProvider.GetRequiredService<ICrudService<UserAccount>>();
         }
 
         private void RegisterButton_Click(object sender, RoutedEventArgs e)
@@ -29,7 +27,6 @@ namespace ClientWPF
             {
                 MessageBox.Show($"Ошибка при регистрации пользователя: {ex.Message}");
             }
-
         }
 
         private async void DeleteUserButton_Click(object sender, RoutedEventArgs e)
@@ -43,11 +40,14 @@ namespace ClientWPF
                     return;
                 }
 
-                var user = await _userService.GetByUserNameAsync(userName);
+                var user = await Connect.GetUserByNameAsync(userName, Token);
                 if (user != null)
                 {
-                    await _userService.DeleteAsync(user.Id);
-                    MessageBox.Show("Пользователь успешно удален.");
+                    var result = await Connect.DeleteUserAsync(user.Id, Token);
+                    if (result)
+                        MessageBox.Show("Пользователь успешно удален.");
+                    else
+                        MessageBox.Show("Не удалось удалить пользователя.");
                 }
                 else
                 {
@@ -70,7 +70,8 @@ namespace ClientWPF
                     MessageBox.Show("Введите имя пользователя для поиска.");
                     return;
                 }
-                var user = await _userService.GetByUserNameAsync(userName);
+
+                var user = await Connect.GetUserByNameAsync(userName, Token);
                 if (user != null)
                 {
                     MessageBox.Show($"Пользователь найден: {user.FullName}");
@@ -86,5 +87,9 @@ namespace ClientWPF
             }
         }
 
+        private void UserNameTextBox_TextChanged(object sender, System.Windows.Controls.TextChangedEventArgs e)
+        {
+
+        }
     }
 }

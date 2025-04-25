@@ -49,12 +49,6 @@ namespace ClientWPF
         {
             try
             {
-              var inBd = await _UserService.GetByUserNameAsync(PlaceholderText.Text);
-                if (inBd!=null)
-                {
-                    MessageBox.Show("Такой пользовтаель уже существует в системе");
-                    return;
-                }
                 UserAccount account = new UserAccount()
                 {
                     UserName = PlaceholderText.Text,

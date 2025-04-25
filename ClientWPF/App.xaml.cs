@@ -14,10 +14,8 @@ namespace ClientWPF
     {
         public static IServiceProvider ServiceProvider { get; private set; }
 
-        protected override void OnStartup(StartupEventArgs e)
+        private void OnStartup(object sender, StartupEventArgs e)
         {
-            base.OnStartup(e);
-
             var configuration = new ConfigurationBuilder()
                 .SetBasePath(Directory.GetCurrentDirectory())
                 .AddJsonFile("appsettings.json", optional: false)
@@ -28,9 +26,6 @@ namespace ClientWPF
             services.AddBusinessLayer();
 
             ServiceProvider = services.BuildServiceProvider();
-
-            var mainWindow = ServiceProvider.GetRequiredService<ChoiseWin>();
-            mainWindow.Show();
         }
     }
 

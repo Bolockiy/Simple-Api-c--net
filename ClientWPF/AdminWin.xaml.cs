@@ -20,21 +20,23 @@ namespace ClientWPF
     /// </summary>
     public partial class AdminWin : Window
     {
-        public AdminWin()
+        private readonly string Token;
+        public AdminWin(string token)
         {
             InitializeComponent();
+            Token = token;
         }
 
         private void OpenTaskWindow_Click(object sender, RoutedEventArgs e)
         {
-            var taskWindow = new TaskWin();
+            var taskWindow = new TaskWin(Token);
             taskWindow.Show();
             this.Close();
         }
 
         private void OpenUserWindow_Click(object sender, RoutedEventArgs e)
         {
-            var userWindow = new UserWin();
+            var userWindow = new UserWin(Token);
             userWindow.Show();
             this.Close();
         }
