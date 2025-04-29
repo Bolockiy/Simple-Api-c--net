@@ -49,7 +49,7 @@ namespace ClientWPF.VeiwModel
             DeleteCommand = new RelayCommand(DeleteUser);
             CreateCommand = new RelayCommand(CreateUser);
             UpdateCommand = new RelayCommand(UpdateUser);
-            GetCommand = new RelayCommand(GetUser);
+            GetCommand = new RelayCommand(GetUserByName);
         }
 
         private async void DeleteUser()
@@ -104,11 +104,60 @@ namespace ClientWPF.VeiwModel
 
         private async void UpdateUser()
         {
-           // await ;
+            try
+            {
+                if (string.IsNullOrWhiteSpace(UserName))
+                {
+                    StatusMessage = "Введите имя пользователя для поиска.";
+                    return;
+                }
+
+                var user = await Connect.GetUserByNameAsync(UserName, _token);
+                if (user != null)
+                {
+                    user.FullName = UserName;
+                    user.UserName = UserName;
+                    if (await Connect.UpdateUserAsync(user.Id, user, _token))
+                    {
+                        StatusMessage = "Вы успешно изменили пользователя";
+                        return;
+                    }
+                    StatusMessage = "Вы не смогли изменить пользователя";
+                }
+                else
+                {
+                    StatusMessage = "Пользователь с таким именем не найден.";
+                }
+            }
+            catch (Exception ex)
+            {
+                StatusMessage = $"Ошибка при получении пользователя: {ex.Message}";
+            }
         }
-        private async void GetUser()
+        private async void GetUserByName()
         {
-           // await;
+            try
+            {
+                if (string.IsNullOrWhiteSpace(UserName))
+                {
+                    StatusMessage = "Введите имя пользователя для поиска.";
+                    return;
+                }
+
+                var user = await Connect.GetUserByNameAsync(UserName, _token);
+                if (user != null)
+                {
+                    StatusMessage = $"Пользователь найден: {user.FullName}";
+                }
+                else
+                {
+                    StatusMessage = "Пользователь с таким именем не найден.";
+                }
+            }
+            catch (Exception ex)
+            {
+                StatusMessage = $"Ошибка при получении пользователя: {ex.Message}";
+            }
         }
         public event PropertyChangedEventHandler? PropertyChanged;
         protected void OnPropertyChanged(string name) =>

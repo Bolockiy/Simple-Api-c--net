@@ -24,8 +24,14 @@
                  VerticalAlignment="Top" 
                  Margin="0,100,0,0" />
 
-        <Button Content="Зарегистрировать пользователя" Width="200" Height="40" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,229,0,0" Click="RegisterButton_Click"/>
-        <Button Content="Удалить пользователя" Width="200" Height="40" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,294,0,0" Command="{Binding DeleteCommand}"/>
-        <Button Content="Получить пользователя по имени" Width="200" Height="40" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,359,0,0" Click="GetUserByNameButton_Click"/>
+        <Button Content="Зарегистрировать пользователя" Command="{Binding CreateCommand}"
+                Width="200" Height="40" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,284,0,0"/>
+        <Button Content="Удалить пользователя" Width="200" Height="40" HorizontalAlignment="Left"
+                VerticalAlignment="Top" Margin="80,359,0,0" Command="{Binding DeleteCommand}"/>
+        <Button Content="Получить пользователя по имени" Width="200" 
+                Height="40" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,359,0,0" Command="{Binding GetCommand}"/>
+        <Button Content="Обновить Пользователя" Width="200" Height="40"
+               HorizontalAlignment="Left" VerticalAlignment="Top" 
+                Margin="530,359,0,0" Command="{Binding UpdateCommand}"/>
     </Grid>
 </Window>
