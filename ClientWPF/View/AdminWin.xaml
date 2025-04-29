@@ -7,7 +7,20 @@
         mc:Ignorable="d"
         Title="AdminWin" Height="450" Width="800">
     <Grid>
-        <Button Content="Открыть окно задач" Click="OpenTaskWindow_Click" Margin="315,184,300,230"/>
-        <Button Content="Открыть окно пользователей" Click="OpenUserWindow_Click" Margin="315,139,300,270"/>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <Button Content="Открыть окно задач"
+            Click="OpenTaskWindow_Click"
+            Margin="10"
+            Grid.Row="0"/>
+
+        <Button Content="Открыть окно пользователей"
+            Click="OpenUserWindow_Click"
+            Margin="10"
+            Grid.Row="1"/>
     </Grid>
+
 </Window>

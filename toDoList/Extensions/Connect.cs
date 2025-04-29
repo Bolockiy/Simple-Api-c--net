@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Diagnostics;
 using NLog;
 using System.Threading.Tasks;
+using System.Xml.Linq;
 using toDoList.Entities.UserAccount;
 using toDoList.User;
 
@@ -9,12 +10,10 @@ namespace ApiLayer.Extensions
 {
     public static class Connect
     {
-        private static readonly Logger logger = LogManager.GetCurrentClassLogger();
+        private const string Url = "https://localhost:7107/api/";
         private const string _apiUrlUser = "https://localhost:7107/api/account/login";
-
-        private static readonly HttpClient _httpClient = new HttpClient();
-        private const string _baseApiUrl = "https://localhost:7107/api/";
-
+        private static HttpClient _httpClient = new HttpClient();
+        private static Logger logger = LogManager.GetCurrentClassLogger();
         public static async Task<LoginResponse?> LoginAsync(string username, string password)
         {
             try
@@ -44,18 +43,18 @@ namespace ApiLayer.Extensions
                 return null;
             }
         }
+
         public static async Task<List<UserAccount>?> GetAllUsersAsync(string token)
         {
             if (string.IsNullOrEmpty(token))
             {
-                logger.Error("Отсутствует токен авторизации.");
+                logger.Error("Пустой токен");
                 return null;
             }
-
             try
             {
-                _httpClient.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", token);
-                return await _httpClient.GetFromJsonAsync<List<UserAccount>>(_baseApiUrl + "user");
+                _httpClient.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Bareer", token);
+                return await _httpClient.GetFromJsonAsync<List<UserAccount>>(Url + "user");
             }
             catch (Exception ex)
             {
@@ -63,42 +62,42 @@ namespace ApiLayer.Extensions
                 return null;
             }
         }
+
         public static async Task<UserAccount?> GetUserByNameAsync(string name, string token)
         {
-            if (string.IsNullOrEmpty(token))
+            if (string.IsNullOrEmpty(name) || string.IsNullOrEmpty(token))
             {
-                logger.Error("Отсутствует токен авторизации.");
+                logger.Error("Пустой токен или имя");
                 return null;
             }
-
             try
             {
-                _httpClient.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", token);
-                return await _httpClient.GetFromJsonAsync<UserAccount>($"{_baseApiUrl}user/name/{name}");
+                _httpClient.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Bareer", token);
+                return await _httpClient.GetFromJsonAsync<UserAccount>($"{Url}user/name/{name}");
             }
             catch (Exception ex)
             {
-                logger.Error($"Ошибка соединения: {ex.Message}");
+                logger.Error($"Ошибка при получении пользователя: {ex.Message}");
                 return null;
             }
+
         }
 
         public static async Task<UserAccount?> GetUserByIdAsync(int id, string token)
         {
             if (string.IsNullOrEmpty(token))
             {
-                logger.Error("Отсутствует токен авторизации.");
+                logger.Error("Пустой токен");
                 return null;
             }
-
             try
             {
-                _httpClient.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", token);
-                return await _httpClient.GetFromJsonAsync<UserAccount>($"{_baseApiUrl}user/id/{id}");
+                _httpClient.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Bareer", token);
+                return await _httpClient.GetFromJsonAsync<UserAccount>($"{Url}user/id/{id}");
             }
             catch (Exception ex)
             {
-                logger.Error($"Ошибка соединения: {ex.Message}");
+                logger.Error($"Ошибка при получении пользователя: {ex.Message}");
                 return null;
             }
         }
@@ -110,11 +109,10 @@ namespace ApiLayer.Extensions
                 logger.Error("Отсутствует токен авторизации.");
                 return false;
             }
-
             try
             {
                 _httpClient.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", token);
-                var response = await _httpClient.PostAsJsonAsync(_baseApiUrl + "user", user);
+                var response = await _httpClient.PostAsJsonAsync(Url + "user", user);
                 return response.IsSuccessStatusCode;
             }
             catch (Exception ex)
@@ -135,7 +133,7 @@ namespace ApiLayer.Extensions
             try
             {
                 _httpClient.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", token);
-                var response = await _httpClient.PutAsJsonAsync($"{_baseApiUrl}user/{id}", user);
+                var response = await _httpClient.PutAsJsonAsync($"{Url}user/{id}", user);
                 return response.IsSuccessStatusCode;
             }
             catch (Exception ex)
@@ -156,7 +154,7 @@ namespace ApiLayer.Extensions
             try
             {
                 _httpClient.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", token);
-                var response = await _httpClient.DeleteAsync($"{_baseApiUrl}user/{id}");
+                var response = await _httpClient.DeleteAsync($"{Url}user/{id}");
                 return response.IsSuccessStatusCode;
             }
             catch (Exception ex)
@@ -177,7 +175,7 @@ namespace ApiLayer.Extensions
             try
             {
                 _httpClient.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", token);
-                return await _httpClient.GetFromJsonAsync<List<ToDoTask>>(_baseApiUrl + "task");
+                return await _httpClient.GetFromJsonAsync<List<ToDoTask>>(Url + "task");
             }
             catch (Exception ex)
             {
@@ -197,7 +195,7 @@ namespace ApiLayer.Extensions
             try
             {
                 _httpClient.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", token);
-                return await _httpClient.GetFromJsonAsync<ToDoTask>($"{_baseApiUrl}task/{id}");
+                return await _httpClient.GetFromJsonAsync<ToDoTask>($"{Url}task/{id}");
             }
             catch (Exception ex)
             {
@@ -217,7 +215,7 @@ namespace ApiLayer.Extensions
             try
             {
                 _httpClient.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", token);
-                var response = await _httpClient.PostAsJsonAsync(_baseApiUrl + "task", task);
+                var response = await _httpClient.PostAsJsonAsync(Url + "task", task);
                 return response.IsSuccessStatusCode;
             }
             catch (Exception ex)
@@ -238,7 +236,7 @@ namespace ApiLayer.Extensions
             try
             {
                 _httpClient.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", token);
-                var response = await _httpClient.PutAsJsonAsync($"{_baseApiUrl}task/{id}", task);
+                var response = await _httpClient.PutAsJsonAsync($"{Url}task/{id}", task);
                 return response.IsSuccessStatusCode;
             }
             catch (Exception ex)
@@ -259,7 +257,7 @@ namespace ApiLayer.Extensions
             try
             {
                 _httpClient.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", token);
-                var response = await _httpClient.DeleteAsync($"{_baseApiUrl}task/{id}");
+                var response = await _httpClient.DeleteAsync($"{Url}task/{id}");
                 return response.IsSuccessStatusCode;
             }
             catch (Exception ex)
@@ -269,4 +267,4 @@ namespace ApiLayer.Extensions
             }
         }
     }
-    }
+}

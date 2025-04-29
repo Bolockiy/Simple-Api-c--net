@@ -25,4 +25,9 @@
     <ProjectReference Include="..\toDoList\ApiLayer.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Model\" />
+    <Folder Include="VeiwModel\" />
+  </ItemGroup>
+
 </Project>
