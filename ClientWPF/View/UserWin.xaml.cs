@@ -14,7 +14,7 @@ namespace ClientWPF.View
         {
             Token = token;
             InitializeComponent();
-            DataContext = new UserViewModel(token); 
+            DataContext = new UserViewModel(token);
         }
     }
 }
