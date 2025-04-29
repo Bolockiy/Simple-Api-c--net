@@ -13,8 +13,9 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 
-namespace ClientWPF
+namespace ClientWPF.View
 {
+
     /// <summary>
     /// Логика взаимодействия для AdminWin.xaml
     /// </summary>

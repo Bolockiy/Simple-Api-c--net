@@ -1,4 +1,5 @@
 ﻿using ApiToDo.Infrastructure.Data;
+using BusinessLayer.Services;
 using Helper.Security;
 using Microsoft.EntityFrameworkCore;
 using NLog;
@@ -8,7 +9,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using toDoList.Entities.UserAccount;
 
-namespace BusinessLayer.Services
+namespace BusinessLayer.Model
 {
     public class UserService : ICrudService<UserAccount>
     {

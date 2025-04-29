@@ -18,8 +18,8 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using toDoList.Entities.UserAccount;
-
-namespace ClientWPF
+using ClientWPF.View;
+namespace ClientWPF.View
 {
     /// <summary>
     /// Логика взаимодействия для Auth.xaml

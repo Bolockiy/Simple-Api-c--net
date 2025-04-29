@@ -24,7 +24,7 @@ namespace ClientWPF
             var services = new ServiceCollection();
             services.AddAppServices(configuration);
             services.AddBusinessLayer();
-
+            
             ServiceProvider = services.BuildServiceProvider();
         }
     }

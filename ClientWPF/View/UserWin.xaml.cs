@@ -1,10 +1,11 @@
 ﻿using ApiLayer.Extensions;
 using ApiToDo.Domain.Entities;
+using ClientWPF.VeiwModel;
 using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Windows;
 
-namespace ClientWPF
+namespace ClientWPF.View
 {
     public partial class UserWin : Window
     {
@@ -13,6 +14,7 @@ namespace ClientWPF
         {
             Token = token;
             InitializeComponent();
+            DataContext = new UserViewModel(token); 
         }
 
         private void RegisterButton_Click(object sender, RoutedEventArgs e)
@@ -26,37 +28,6 @@ namespace ClientWPF
             catch (Exception ex)
             {
                 MessageBox.Show($"Ошибка при регистрации пользователя: {ex.Message}");
-            }
-        }
-
-        private async void DeleteUserButton_Click(object sender, RoutedEventArgs e)
-        {
-            try
-            {
-                string userName = UserNameTextBox.Text.Trim();
-                if (string.IsNullOrWhiteSpace(userName))
-                {
-                    MessageBox.Show("Введите имя пользователя для удаления.");
-                    return;
-                }
-
-                var user = await Connect.GetUserByNameAsync(userName, Token);
-                if (user != null)
-                {
-                    var result = await Connect.DeleteUserAsync(user.Id, Token);
-                    if (result)
-                        MessageBox.Show("Пользователь успешно удален.");
-                    else
-                        MessageBox.Show("Не удалось удалить пользователя.");
-                }
-                else
-                {
-                    MessageBox.Show("Пользователь с таким именем не найден.");
-                }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show($"Ошибка при удалении пользователя: {ex.Message}");
             }
         }
 

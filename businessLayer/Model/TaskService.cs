@@ -1,5 +1,6 @@
 ﻿using ApiToDo.Domain.Entities;
 using ApiToDo.Infrastructure.Data;
+using BusinessLayer.Services;
 using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.EntityFrameworkCore;
 using NLog;
@@ -7,7 +8,7 @@ using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
-namespace BusinessLayer.Services
+namespace BusinessLayer.Model
 {
     public class TaskService : ICrudService<ToDoTask>
     {

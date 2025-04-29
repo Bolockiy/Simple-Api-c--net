@@ -22,7 +22,7 @@ using System.Windows.Shapes;
 using toDoList.Entities.UserAccount;
 using static System.Net.Mime.MediaTypeNames;
 
-namespace ClientWPF
+namespace ClientWPF.View
 {
     /// <summary>
     /// Interaction logic for MainWindow.xaml

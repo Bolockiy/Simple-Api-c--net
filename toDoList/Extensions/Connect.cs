@@ -1,6 +1,8 @@
 ﻿using ApiToDo.Domain.Entities;
 using Microsoft.AspNetCore.Diagnostics;
 using NLog;
+using System.Net.Http.Headers;
+using System.Net.Http;
 using System.Threading.Tasks;
 using System.Xml.Linq;
 using toDoList.Entities.UserAccount;
@@ -72,7 +74,8 @@ namespace ApiLayer.Extensions
             }
             try
             {
-                _httpClient.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Bareer", token);
+                _httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
+
                 return await _httpClient.GetFromJsonAsync<UserAccount>($"{Url}user/name/{name}");
             }
             catch (Exception ex)
