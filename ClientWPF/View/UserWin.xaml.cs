@@ -21,7 +21,7 @@ namespace ClientWPF.View
         {
             try
             {
-                MainWindow mainWindow = new MainWindow();
+                MainWindow mainWindow = new MainWindow(Token);
                 mainWindow.Show();
                 this.Close();
             }

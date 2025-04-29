@@ -1,10 +1,13 @@
 ﻿using ApiLayer.Extensions;
+using BusinessLayer.Model;
 using BusinessLayer.Services;
 using ClientWPF.VeiwModel.Base;
+using ClientWPF.View;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -17,8 +20,8 @@ namespace ClientWPF.VeiwModel
     {
         private string _userName = "";
         private string _statusMessage = "";
-        private string _token;
-
+        private readonly string _token;
+        private string _password = "";
         public string UserName
         {
             get => _userName;
@@ -30,16 +33,23 @@ namespace ClientWPF.VeiwModel
             get => _statusMessage;
             set { _statusMessage = value; OnPropertyChanged(nameof(StatusMessage)); }
         }
-
+        public string Password
+        {
+            get => _password;
+            set { _password = value; OnPropertyChanged(nameof(_password)); }
+        }
         public ICommand DeleteCommand { get; }
         public ICommand UpdateCommand { get; }
-        public ICommand Create { get;}
+        public ICommand CreateCommand { get;}
         public ICommand GetCommand { get; }
 
-        public UserViewModel( string token)
+        public UserViewModel(string token)
         {
             _token = token;
             DeleteCommand = new RelayCommand(DeleteUser);
+            CreateCommand = new RelayCommand(CreateUser);
+            UpdateCommand = new RelayCommand(UpdateUser);
+            GetCommand = new RelayCommand(GetUser);
         }
 
         private async void DeleteUser()
@@ -72,6 +82,34 @@ namespace ClientWPF.VeiwModel
             }
         }
 
+        private async void CreateUser()
+        {
+            try
+            {
+                UserAccount account = new UserAccount()
+                {
+                    UserName = UserName,
+                    FullName = UserName,
+                    Password = _password,
+                    Role = 0
+                };
+                await Connect.CreateUserAsync(account, _token);
+                StatusMessage = "Вы успешно зарегестрировались";
+            }
+            catch (Exception ex)
+            {
+                StatusMessage = $"Что-то пошло не так {ex.Data.ToString()}";
+            }
+        }
+
+        private async void UpdateUser()
+        {
+           // await ;
+        }
+        private async void GetUser()
+        {
+           // await;
+        }
         public event PropertyChangedEventHandler? PropertyChanged;
         protected void OnPropertyChanged(string name) =>
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));

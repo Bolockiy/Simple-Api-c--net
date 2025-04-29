@@ -10,11 +10,21 @@
         <Label Content="Регистрация" HorizontalAlignment="Left" Margin="25,10,0,0" VerticalAlignment="Top" Width="95"/>
 
         <Label Content="Логин:" HorizontalAlignment="Left" Margin="25,40,0,0" VerticalAlignment="Top" Width="95"/>
-        <TextBox x:Name="PlaceholderText" HorizontalAlignment="Left" Margin="25,60,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="95"/>
+        <TextBox x:Name="PlaceholderText" 
+                 Text="{Binding UserName}"
+                 HorizontalAlignment="Left" Margin="25,60,0,0" 
+                 TextWrapping="Wrap" VerticalAlignment="Top" Width="95"/>
 
         <Label Content="Пароль:" HorizontalAlignment="Left" Margin="25,90,0,0" VerticalAlignment="Top" Width="95"/>
-        <TextBox x:Name="PlaceholderText_1" HorizontalAlignment="Left" Margin="25,110,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="95"/>
+        <TextBox x:Name="PlaceholderText_1" 
+                 Text="{Binding Password}"
+                 HorizontalAlignment="Left"
+                 Margin="25,110,0,0" TextWrapping="Wrap" 
+                 VerticalAlignment="Top" Width="95"/>
 
-        <Button x:Name="BTN_1" Content="Регистрация" HorizontalAlignment="Left" Margin="25,160,0,0" VerticalAlignment="Top" Width="97" Click="BTN_1_Click"/>
+        <Button x:Name="BTN_1" Content="Регистрация" HorizontalAlignment="Left"
+                Margin="25,160,0,0" VerticalAlignment="Top" Width="97" 
+                Command="{Binding CreateUser}"
+                />
     </Grid>
 </Window>

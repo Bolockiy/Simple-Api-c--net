@@ -30,12 +30,5 @@ namespace ClientWPF.View
             auth.Show();
             this.Close();          
         }
-
-        private void Button_Click_1(object sender, RoutedEventArgs e)
-        {
-            MainWindow reg = new MainWindow();
-            reg.Show();
-            this.Close();
-        }
     }
 }
