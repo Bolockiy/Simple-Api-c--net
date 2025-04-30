@@ -12,6 +12,7 @@ using toDoList.Entities.UserAccount;
 using Helper.Security;
 using toDoList.Services;
 using NLog.Web;
+using BusinessLayer.Extensions.DB;
 
 var logger = NLog.LogManager.Setup().LoadConfigurationFromFile("nlog.config").GetCurrentClassLogger();
 logger.Info("Приложение запускается...");
@@ -26,9 +27,10 @@ try
 
     using (var scope = app.Services.CreateScope())
     {
-        var dbContext = scope.ServiceProvider.GetRequiredService<AppDbContext>();
-        DbInitializer.SeedAdminUser(dbContext);
+        var initializer = scope.ServiceProvider.GetRequiredService<IDatabaseInitializer>();
+        await initializer.InitializeAsync();
     }
+
 
     if (app.Environment.IsDevelopment())
     {

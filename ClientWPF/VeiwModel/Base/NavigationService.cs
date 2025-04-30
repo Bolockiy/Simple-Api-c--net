@@ -13,13 +13,13 @@ namespace ClientWPF.VeiwModel
     {
         public void NavigateToTask(string token)
         {
-            var window = new TaskWin(token);
+            var window = new TaskWindow(token);
             ShowAndCloseCurrent(window);
         }
 
         public void NavigateToUser(string token)
         {
-            var window = new UserWin(token);
+            var window = new UserWindow(token);
             ShowAndCloseCurrent(window);
         }
 

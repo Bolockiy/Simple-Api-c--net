@@ -22,7 +22,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\businessLayer\BusinessLayer.csproj" />
-    <ProjectReference Include="..\DataBaseLayer\DataBaseLayer.csproj" />
     <ProjectReference Include="..\Helper\Helper.csproj" />
   </ItemGroup>
 

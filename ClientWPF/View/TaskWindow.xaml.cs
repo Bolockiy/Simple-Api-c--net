@@ -20,9 +20,9 @@ using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 namespace ClientWPF.View
 {
-    public partial class TaskWin : Window
+    public partial class TaskWindow : Window
     {
-        public TaskWin(string token)
+        public TaskWindow(string token)
         {
             InitializeComponent();
             DataContext = new TaskModel(token);           

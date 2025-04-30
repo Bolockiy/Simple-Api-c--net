@@ -1,4 +1,5 @@
 ﻿using ApiToDo.Infrastructure.Data;
+using BusinessLayer.Extensions.DB;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
@@ -41,6 +42,7 @@ public static class ServiceCollectionExtensions
               npgsqlOptions.MigrationsAssembly("DataBaseLayer");
           }));
 
+        services.AddScoped<IDatabaseInitializer, DatabaseInitializer>();
 
         services.AddAuthentication(options =>
         {

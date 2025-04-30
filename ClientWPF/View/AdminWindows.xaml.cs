@@ -16,9 +16,9 @@ using System.Windows.Shapes;
 
 namespace ClientWPF.View
 {
-    public partial class AdminWin : Window
+    public partial class AdminWindow : Window
     {
-        public AdminWin(string token)
+        public AdminWindow(string token)
         {
             InitializeComponent();
             var navigationService = new NavigationService();

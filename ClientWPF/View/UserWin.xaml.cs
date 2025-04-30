@@ -7,9 +7,9 @@ using System.Windows;
 
 namespace ClientWPF.View
 {
-    public partial class UserWin : Window
+    public partial class UserWindow : Window
     {
-        public UserWin(string token)
+        public UserWindow(string token)
         {
             InitializeComponent();
             DataContext = new UserViewModel(token);

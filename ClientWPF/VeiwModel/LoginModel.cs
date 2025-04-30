@@ -55,9 +55,9 @@ namespace ClientWPF.VeiwModel
                 Window next;
 
                 if (result.isAdmin)
-                    next = new AdminWin(result.AccessToken);
+                    next = new AdminWindow(result.AccessToken);
                 else
-                    next = new TaskWin(result.AccessToken);
+                    next = new TaskWindow(result.AccessToken);
 
                 next.Show();
                 current?.Close();
