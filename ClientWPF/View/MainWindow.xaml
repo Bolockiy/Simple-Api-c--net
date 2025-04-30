@@ -11,13 +11,13 @@
 
         <Label Content="Логин:" HorizontalAlignment="Left" Margin="25,40,0,0" VerticalAlignment="Top" Width="95"/>
         <TextBox x:Name="PlaceholderText" 
-                 Text="{Binding UserName}"
+                 Text="{Binding UserName,UpdateSourceTrigger=PropertyChanged}"
                  HorizontalAlignment="Left" Margin="25,60,0,0" 
                  TextWrapping="Wrap" VerticalAlignment="Top" Width="95"/>
 
         <Label Content="Пароль:" HorizontalAlignment="Left" Margin="25,90,0,0" VerticalAlignment="Top" Width="95"/>
         <TextBox x:Name="PlaceholderText_1" 
-                 Text="{Binding Password}"
+                 Text="{Binding Password,UpdateSourceTrigger=PropertyChanged}"
                  HorizontalAlignment="Left"
                  Margin="25,110,0,0" TextWrapping="Wrap" 
                  VerticalAlignment="Top" Width="95"/>

@@ -10,11 +10,11 @@
         <Label Content="Авторизация" HorizontalAlignment="Left" Margin="25,15,0,0" VerticalAlignment="Top" Width="95"/>
 
         <Label Content="Логин:" HorizontalAlignment="Left" Margin="25,45,0,0" VerticalAlignment="Top"/>
-        <TextBox x:Name="LoginTextBox" HorizontalAlignment="Left" Margin="25,65,0,0" Width="95" VerticalAlignment="Top"/>
+        <TextBox x:Name="LoginTextBox" HorizontalAlignment="Left" Margin="25,65,0,0" Width="95" VerticalAlignment="Top" Text="{Binding Login,UpdateSourceTrigger=PropertyChanged}"/>
 
         <Label Content="Пароль:" HorizontalAlignment="Left" Margin="25,95,0,0" VerticalAlignment="Top"/>
-        <TextBox x:Name="PasswordTextBox" HorizontalAlignment="Left" Margin="25,115,0,0" Width="95" VerticalAlignment="Top"/>
+        <TextBox x:Name="PasswordTextBox" HorizontalAlignment="Left" Margin="25,115,0,0" Width="95" VerticalAlignment="Top" Text="{Binding Login,UpdateSourceTrigger=PropertyChanged}"/>
 
-        <Button x:Name="BTN_1" Content="Авторизироваться" HorizontalAlignment="Left" Margin="25,160,0,0" VerticalAlignment="Top" Width="105" Click="BTN_1_Click"/>
+        <Button x:Name="BTN_1" Content="Авторизироваться" HorizontalAlignment="Left" Margin="25,160,0,0" VerticalAlignment="Top" Width="105" Command="{Binding LoginAsync}"/>
     </Grid>
 </Window>

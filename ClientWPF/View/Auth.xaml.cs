@@ -19,6 +19,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using toDoList.Entities.UserAccount;
 using ClientWPF.View;
+using ClientWPF.VeiwModel;
 namespace ClientWPF.View
 {
     public partial class Auth : Window
@@ -26,31 +27,7 @@ namespace ClientWPF.View
         public Auth()
         {
             InitializeComponent();
-        }
-
-        private async void BTN_1_Click(object sender, RoutedEventArgs e)
-        {
-            var result = await Connect.LoginAsync(LoginTextBox.Text, PasswordTextBox.Text);
-           
-            if (result == null)
-            {
-                MessageBox.Show("Неверный логин или пароль");
-                return;
-            }
-
-            MessageBox.Show($"Добро пожаловать, {result.UserName}!");
-            if (result.isAdmin)
-            {
-                AdminWin adminWin = new AdminWin(result.AccessToken);
-                adminWin.Show();
-                this.Close();
-            }
-            else
-            {
-                TaskWin taskWin = new TaskWin(result.AccessToken);
-                taskWin.Show();
-                this.Close();
-            }
+            DataContext = new AuthViewModel();
         }
     }
 }
