@@ -13,8 +13,8 @@
         <TextBox x:Name="LoginTextBox" HorizontalAlignment="Left" Margin="25,65,0,0" Width="95" VerticalAlignment="Top" Text="{Binding Login,UpdateSourceTrigger=PropertyChanged}"/>
 
         <Label Content="Пароль:" HorizontalAlignment="Left" Margin="25,95,0,0" VerticalAlignment="Top"/>
-        <TextBox x:Name="PasswordTextBox" HorizontalAlignment="Left" Margin="25,115,0,0" Width="95" VerticalAlignment="Top" Text="{Binding Login,UpdateSourceTrigger=PropertyChanged}"/>
+        <TextBox x:Name="PasswordTextBox" HorizontalAlignment="Left" Margin="25,115,0,0" Width="95" VerticalAlignment="Top" Text="{Binding Password,UpdateSourceTrigger=PropertyChanged}"/>
 
-        <Button x:Name="BTN_1" Content="Авторизироваться" HorizontalAlignment="Left" Margin="25,160,0,0" VerticalAlignment="Top" Width="105" Command="{Binding LoginAsync}"/>
+        <Button x:Name="BTN_1" Content="Авторизироваться" HorizontalAlignment="Left" Margin="25,160,0,0" VerticalAlignment="Top" Width="105" Command="{Binding LoginCommand}"/>
     </Grid>
 </Window>

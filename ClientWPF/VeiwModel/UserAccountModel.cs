@@ -94,7 +94,7 @@ namespace ClientWPF.VeiwModel
                     Role = 0
                 };
                 await Connect.CreateUserAsync(account, _token);
-                StatusMessage = "Вы успешно зарегестрировались";
+                StatusMessage = "Вы успешно зарегистрировались";
             }
             catch (Exception ex)
             {

@@ -24,7 +24,7 @@
                 HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,334,0,0" Command="{Binding CreateCommand}"/>
         <Button Content="Удалить задачу" Width="200" Height="40" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,419,0,0" Command="{Binding DeleteCommand}"/>
         <Button Content="Обновить задачу" Width="200" Height="40" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,494,0,0" Command="{Binding UpdateCommand}"/>
-
+        <Button Content="Обновить БД" Width="200" Height="40" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="53,419,0,0" Command="{Binding UpdateTasksCommand}"/>
         <DataGrid Name="TasksDataGrid" ItemsSource="{Binding Tasks}"
             HorizontalAlignment="Left" 
                   VerticalAlignment="Top" Width="550" Height="200"

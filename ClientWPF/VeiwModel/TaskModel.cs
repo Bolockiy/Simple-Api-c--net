@@ -20,7 +20,7 @@ namespace ClientWPF.VeiwModel
 {
     public class TaskModel : INotifyPropertyChanged
     {
-        private string _id;
+        private string _id = "";
         private string _Tittle = "";
         private string _statusMessage = "";
         private readonly string _token;
@@ -79,6 +79,7 @@ namespace ClientWPF.VeiwModel
         public ICommand DeleteCommand { get; }
         public ICommand UpdateCommand { get; }
         public ICommand CreateCommand { get;}
+        public ICommand UpdateTasksCommand { get; }
 
         public TaskModel(string token)
         {
@@ -86,6 +87,7 @@ namespace ClientWPF.VeiwModel
             DeleteCommand = new RelayCommand(DeleteTask);
             CreateCommand = new RelayCommand(CreateTask);
             UpdateCommand = new RelayCommand(UpdateTask);
+            UpdateTasksCommand = new RelayCommand(UpdateTasks);
         }
 
         private async void DeleteTask()
@@ -176,6 +178,11 @@ namespace ClientWPF.VeiwModel
             {
                 StatusMessage = $"Ошибка: {ex.Message}";
             }
+        }
+
+        private async void UpdateTasks()
+        {
+            await LoadTasksAsync();
         }
         public event PropertyChangedEventHandler? PropertyChanged;
         protected void OnPropertyChanged(string name) =>

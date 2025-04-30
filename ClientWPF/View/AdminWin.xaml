@@ -13,14 +13,12 @@
         </Grid.RowDefinitions>
 
         <Button Content="Открыть окно задач"
-            Click="OpenTaskWindow_Click"
             Margin="10"
             Grid.Row="0"
             Command="{Binding OpenTaskCommand}"
                 />
 
         <Button Content="Открыть окно пользователей"
-            Click="OpenUserWindow_Click"
             Margin="10"
             Grid.Row="1"
              Command="{Binding OpenUserCommand}"   
