@@ -4,22 +4,30 @@
         Title="TaskWin" Height="600" Width="1000">
     <Grid>
         <Label Content="ID задачи:" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="20,20,0,0"/>
-        <TextBox Name="TaskIdTextBox" Width="200" Height="30" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="150,20,0,0"/>
+        <TextBox Name="TaskIdTextBox" Width="200" Height="30" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="150,20,0,0" Text="{Binding Id,UpdateSourceTrigger=PropertyChanged}"/>
 
         <Label Content="Название задачи:" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="20,80,0,0"/>
-        <TextBox Name="TitleTextBox" Width="200" Height="30" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="150,80,0,0"/>
+        <TextBox Name="TitleTextBox" Width="200" Height="30" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="150,80,0,0" Text="{Binding Tittle,UpdateSourceTrigger=PropertyChanged}"/>
 
         <Label Content="Описание задачи:" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="20,140,0,0"/>
-        <TextBox Name="DescriptionTextBox" Width="200" Height="30" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="150,140,0,0"/>
+        <TextBox Name="DescriptionTextBox" Width="200" Height="30" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="150,140,0,0"  Text="{Binding Description,UpdateSourceTrigger=PropertyChanged}"/>
 
-        <CheckBox Name="IsCompletedCheckBox" Content="Завершено" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="150,200,0,0"/>
+        <CheckBox Name="IsCompletedCheckBox"
+          Content="Завершено"
+          HorizontalAlignment="Left"
+          VerticalAlignment="Top"
+          Margin="150,200,0,0"
+          IsChecked="{Binding IsCompleted, Mode=TwoWay}" />
 
-        <Button Content="Добавить задачу" Width="200" Height="40" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,334,0,0" Click="AddButton_Click"/>
-        <Button Content="Удалить задачу" Width="200" Height="40" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,419,0,0" Click="DeleteButton_Click"/>
-        <Button Content="Обновить задачу" Width="200" Height="40" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,494,0,0" Click="UpdateButton_Click"/>
 
-        <Button Content="Обновить список задач" Width="200" Height="30" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="720,15,0,0" Click="RefreshTasksButton_Click"/>
+        <Button Content="Добавить задачу" Width="200" Height="40"
+                HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,334,0,0" Command="{Binding CreateCommand}"/>
+        <Button Content="Удалить задачу" Width="200" Height="40" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,419,0,0" Command="{Binding DeleteCommand}"/>
+        <Button Content="Обновить задачу" Width="200" Height="40" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,494,0,0" Command="{Binding UpdateCommand}"/>
 
-        <DataGrid Name="TasksDataGrid" HorizontalAlignment="Left" VerticalAlignment="Top" Width="550" Height="200" Margin="370,50,0,0" AutoGenerateColumns="True"/>
+        <DataGrid Name="TasksDataGrid" ItemsSource="{Binding Tasks}"
+            HorizontalAlignment="Left" 
+                  VerticalAlignment="Top" Width="550" Height="200"
+                  Margin="370,50,0,0" AutoGenerateColumns="True"/>
     </Grid>
 </Window>

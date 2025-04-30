@@ -15,10 +15,6 @@ using System.Windows.Shapes;
 
 namespace ClientWPF.View
 {
-
-    /// <summary>
-    /// Логика взаимодействия для AdminWin.xaml
-    /// </summary>
     public partial class AdminWin : Window
     {
         private readonly string Token;

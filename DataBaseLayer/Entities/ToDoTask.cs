@@ -21,9 +21,9 @@ namespace ApiToDo.Domain.Entities
 
         public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
 
-        public DateTime? CompletedAt { get; private set; } = null;
+        public DateTime? CompletedAt { get; set; } = null;
 
-        public DateTime? UpdatedAt { get; private set; } = null;
+        public DateTime? UpdatedAt { get; set; } = null;
 
         public void Update(string? title, string? description, bool? isCompleted)
         {

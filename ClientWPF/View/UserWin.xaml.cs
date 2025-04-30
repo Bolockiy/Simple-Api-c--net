@@ -9,10 +9,8 @@ namespace ClientWPF.View
 {
     public partial class UserWin : Window
     {
-        private string Token;
         public UserWin(string token)
         {
-            Token = token;
             InitializeComponent();
             DataContext = new UserViewModel(token);
         }

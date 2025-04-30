@@ -21,9 +21,6 @@ using toDoList.Entities.UserAccount;
 using ClientWPF.View;
 namespace ClientWPF.View
 {
-    /// <summary>
-    /// Логика взаимодействия для Auth.xaml
-    /// </summary>
     public partial class Auth : Window
     {
         private readonly ICrudService<UserAccount> _UserService;
