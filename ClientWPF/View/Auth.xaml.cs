@@ -23,11 +23,9 @@ namespace ClientWPF.View
 {
     public partial class Auth : Window
     {
-        private readonly ICrudService<UserAccount> _UserService;
         public Auth()
         {
             InitializeComponent();
-            _UserService = App.ServiceProvider.GetRequiredService<ICrudService<UserAccount>>();
         }
 
         private async void BTN_1_Click(object sender, RoutedEventArgs e)
