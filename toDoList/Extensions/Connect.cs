@@ -55,8 +55,8 @@ namespace ApiLayer.Extensions
             }
             try
             {
-                _httpClient.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Bareer", token);
-                return await _httpClient.GetFromJsonAsync<List<UserAccount>>(Url + "user");
+                _httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
+                return await _httpClient.GetFromJsonAsync<List<UserAccount>>(Url + "User");
             }
             catch (Exception ex)
             {
@@ -75,8 +75,7 @@ namespace ApiLayer.Extensions
             try
             {
                 _httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
-
-                return await _httpClient.GetFromJsonAsync<UserAccount>($"{Url}user/name/{name}");
+                return await _httpClient.GetFromJsonAsync<UserAccount>($"{Url}User/name/{name}");
             }
             catch (Exception ex)
             {
@@ -95,8 +94,8 @@ namespace ApiLayer.Extensions
             }
             try
             {
-                _httpClient.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Bareer", token);
-                return await _httpClient.GetFromJsonAsync<UserAccount>($"{Url}user/id/{id}");
+                _httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
+                return await _httpClient.GetFromJsonAsync<UserAccount>($"{Url}User/id/{id}");
             }
             catch (Exception ex)
             {
@@ -114,8 +113,8 @@ namespace ApiLayer.Extensions
             }
             try
             {
-                _httpClient.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", token);
-                var response = await _httpClient.PostAsJsonAsync(Url + "user", user);
+                _httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
+                var response = await _httpClient.PostAsJsonAsync(Url + "User", user);
                 return response.IsSuccessStatusCode;
             }
             catch (Exception ex)
@@ -135,8 +134,8 @@ namespace ApiLayer.Extensions
 
             try
             {
-                _httpClient.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", token);
-                var response = await _httpClient.PutAsJsonAsync($"{Url}user/{id}", user);
+                _httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
+                var response = await _httpClient.PutAsJsonAsync($"{Url}User/{id}", user);
                 return response.IsSuccessStatusCode;
             }
             catch (Exception ex)
@@ -156,8 +155,8 @@ namespace ApiLayer.Extensions
 
             try
             {
-                _httpClient.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", token);
-                var response = await _httpClient.DeleteAsync($"{Url}user/{id}");
+                _httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
+                var response = await _httpClient.DeleteAsync($"{Url}User/{id}");
                 return response.IsSuccessStatusCode;
             }
             catch (Exception ex)
@@ -177,7 +176,7 @@ namespace ApiLayer.Extensions
 
             try
             {
-                _httpClient.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", token);
+                _httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
                 return await _httpClient.GetFromJsonAsync<List<ToDoTask>>(Url + "task");
             }
             catch (Exception ex)
@@ -197,7 +196,7 @@ namespace ApiLayer.Extensions
 
             try
             {
-                _httpClient.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", token);
+                _httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
                 return await _httpClient.GetFromJsonAsync<ToDoTask>($"{Url}task/{id}");
             }
             catch (Exception ex)
@@ -217,7 +216,7 @@ namespace ApiLayer.Extensions
 
             try
             {
-                _httpClient.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", token);
+                _httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
                 var response = await _httpClient.PostAsJsonAsync(Url + "task", task);
                 return response.IsSuccessStatusCode;
             }
@@ -238,7 +237,7 @@ namespace ApiLayer.Extensions
 
             try
             {
-                _httpClient.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", token);
+                _httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
                 var response = await _httpClient.PutAsJsonAsync($"{Url}task/{id}", task);
                 return response.IsSuccessStatusCode;
             }
@@ -259,7 +258,7 @@ namespace ApiLayer.Extensions
 
             try
             {
-                _httpClient.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", token);
+                _httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
                 var response = await _httpClient.DeleteAsync($"{Url}task/{id}");
                 return response.IsSuccessStatusCode;
             }
