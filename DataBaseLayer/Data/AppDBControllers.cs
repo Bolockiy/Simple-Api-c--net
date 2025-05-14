@@ -1,4 +1,5 @@
 ﻿using ApiToDo.Domain.Entities;
+using DataBaseLayer.Entities;
 using Helper.Security;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
@@ -18,6 +19,7 @@ namespace ApiToDo.Infrastructure.Data
             base.OnModelCreating(modelBuilder);
             modelBuilder.Entity<ToDoTask>().ToTable("tasks");
             modelBuilder.Entity<UserAccount>().ToTable("UserAccount");
+            modelBuilder.Entity<Notification>().ToTable("Notification");
         }
 
     }
